@@ -113,32 +113,29 @@ namespace hw1
             }
         }
 
+       
+
         private void Button_Click_Plus(object sender, RoutedEventArgs e)
         {
-            //string op = textBox1.Text;
 
-            //if(textBox2.Text == "0")
-            //{
-            //    textBox2.Clear();
-            //}
+            string input = textBox1.Text;
+            if (double.TryParse(input, out double operand))
+            {
+                DoubleResult += operand;
 
+                textBox1.Clear();
 
-            //if (textBox2.Text != "+")
-            //{
-            //    textBox2.Text += " + ";
-            //}
+            
+            }
 
-            //if (op.Contains("."))
-            //{
-            //    double operand = Convert.ToDouble(op);
-            //    DoubleResult += operand;
-            //}
-            //else
-            //{
-            //    int operand = int.Parse(op);
-            //    IntResult += operand;
-            //}
-            //textBox1.Clear();
+           
+
+            if (double.TryParse(input, out double operand1))
+            {
+                DoubleResult += operand1;
+
+                textBox1.Clear();
+            }
 
 
 
@@ -152,51 +149,104 @@ namespace hw1
                 textBox2.Text += " + ";
             }
 
-            // Получаем первое число из textBox1
-            if (int.TryParse(textBox1.Text, out int res1))
-            {
-                IntResult += res1; // Добавляем первое число к результату
-                textBox1.Clear();
-            }
-            else
-            {
-                MessageBox.Show("Ошибка: Введите корректное число в поле TextBox1");
-                return;
-            }
+   
+            
 
-            // Получаем второе число из textBox2 (если оно нужно)
-            if (int.TryParse(textBox2.Text.Replace("+", "").Trim(), out int res2))
-            {
-                IntResult += res2; // Добавляем второе число к результату
-                textBox2.Clear();
-            }
-            else
-            {
-                MessageBox.Show("Ошибка: Введите корректное число в поле TextBox2");
-            }
+
+          
 
         }
 
-        private void Button_Click_12(object sender, RoutedEventArgs e)
+        private void Button_Click_CE(object sender, RoutedEventArgs e)
         {
             textBox1.Clear();
+            DoubleResult = 0;
+        }
+
+        private void Button_Click_Equals(object sender, RoutedEventArgs e)
+        {
+
+           
+
+            if (!string.IsNullOrWhiteSpace(textBox2.Text))
+            {
+                string doubleRes = DoubleResult.ToString();
+                textBox1.Text = doubleRes;
+                textBox2.Text += $" = {doubleRes}";
+            }
+
+            DoubleResult = 0;
+
+
+        }
+
+        private void Button_Click_Minus(object sender, RoutedEventArgs e)
+        {
+
+            DoubleResult = 0;
+
+            if (!textBox2.Text.Contains("-"))
+            {
+                textBox2.Text += " - ";
+            }
+
+            string input = textBox1.Text;
+
+            double operand = Convert.ToDouble(input);
+
+            textBox1.Clear();
+
+            
+
+            double operand1 = Convert.ToDouble(input);
+            DoubleResult = operand - operand1;
+
+        }
+
+        private void Button_Click_11(object sender, RoutedEventArgs e)
+        {
+            textBox2.Text += " * ";
+            string op = textBox1.Text;
+            textBox1.Clear();
+         
+
+            double operand = Convert.ToDouble(op);
+            double operand1 = Convert.ToDouble(op);
+
+            DoubleResult = operand * operand1;
+
+
         }
 
         private void Button_Click_13(object sender, RoutedEventArgs e)
         {
-            if (textBox2.Text.Contains("."))
-            {
-                textBox1.Clear();
-                string doubleRes = DoubleResult.ToString();
-                textBox1.Text = doubleRes;
+            textBox2.Text += " / ";
+            string op = textBox1.Text;
+            textBox1.Clear();
+
+
+            double operand = Convert.ToDouble(op);
+            double operand1 = Convert.ToDouble(op);
+
+            if(operand != 0 || operand1 != 0) {
+
+                DoubleResult = operand / operand1;
+
             }
-            else
-            {
-                textBox1.Clear();
-                string intRes = IntResult.ToString();
-                textBox1.Text = intRes;
-                textBox2.Text += " = " + intRes;
-            }
+  
+        }
+
+        private void Button_Click_C(object sender, RoutedEventArgs e)
+        {
+            textBox1.Clear();
+            textBox2.Clear();
+            DoubleResult = 0;
+        }
+
+        private void Button_Click_Less(object sender, RoutedEventArgs e)
+        {
+            textBox1.Clear();
+
         }
     }
 }
